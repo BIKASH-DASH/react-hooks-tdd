@@ -38,3 +38,11 @@ $color:#282c34;
     transform: rotate(360deg);
   }
 }
+.name{
+  display: flex;
+  justify-content: space-between;
+}
+.nameTag{
+  border: 1px solid rebeccapurple;
+  padding-left: 13px !important;
+}

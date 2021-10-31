@@ -1,13 +1,12 @@
 import './App.scss';
-
-const nameStyle = {color:"green",paddingTop:'1px',}
+import NameTag from './components/NameTag';
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <h1>Name List</h1>
-        <h3 style={nameStyle}>bikash</h3>
-        <h3>dash</h3>
+        <NameTag firstName="bikash" lastName="dash" ></NameTag>
+        <NameTag  ></NameTag>
       </header>
     </div>
   );
