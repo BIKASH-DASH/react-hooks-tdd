@@ -1,6 +1,7 @@
 {
     "rules":{
-        "no-var":"error",
-        "no-alert":"error"
+        "no-var":"warn",
+        "no-alert":"warn",
+        "no-console":"warn"
     }
 }

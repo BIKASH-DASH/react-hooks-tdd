@@ -1,25 +1,25 @@
-import './App.scss';
-import React,{useState} from 'react'
-import NameTag from './components/NameTag';
-
-const initNames = [
-  {firstName:'bikash',lastName:'dash'},
-  {firstName:'pitar',lastName:'parker'},
-  {firstName:'brush',lastName:'wain'},
+import React, { useState } from 'react'
+import './App.scss'
+import Item from './components/Item'
+import UseList from './hooks/useList'
+const initialList = [
+  { name: "tomato", calorie: 20 },
+  { name: "rice", calorie: 50 },
+  { name: "candy", calorie: 150 },
 ]
-function App() {
-  const [user, setUser] = useState(initNames)
+
+
+export default function App() {
+  const useList = UseList(initialList);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Name List</h1>
-        {user.map((usr,index)=>{
-          return (<NameTag key={index} style={{color:'red'}} firstName={usr.firstName} lastName={usr.lastName} ></NameTag>)
-        })}
-        
-      </header>
+    <div>
+      {useList.list.map((item, index) => {
+        return (<Item key={index} changeEdit={useList.changeEdit} name={item.name} HandleEdit={useList.HandleEdit} editable={useList.editable} removeItem={useList.removeItem} calorie={item.calorie} />)
+      })}
+
+      <button onClick={() => useList.handleCalory()} className='remove-button'>remove Button</button>
     </div>
-  );
+  )
 }
 
-export default App;
