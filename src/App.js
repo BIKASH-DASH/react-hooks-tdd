@@ -1,56 +1,29 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function App() {
-  const nameRef = useRef();
-  const ageRef = useRef();
-  const marredRef = useRef();
-  const submitRef = useRef();
+  const [profile, setProfile] = useState({
+    followers:null,
+    following:null,
+    public_repos:null
+  })
+  const getProfile = async()=>{
+   const response =  await fetch(`https://api.github.com/users/BIKASH-DASH`);
+   const json = await response.json();
+   setProfile({
+    followers:json.followers,
+    following:json.following,
+    public_repos:json.public_repos
+   })
+  }
   useEffect(() => {
-    nameRef.current.focus();
+    getProfile();
   }, [])
-
-  const keyPressHandle = (e) => {
-    if (e.keyCode === 13) {
-      switch (e.target.id) {
-        case 'nameInput':
-          ageRef.current.focus();
-          break;
-        case 'ageInput':
-          marredRef.current.focus();
-          break;
-        case 'marriedInput':
-          submitRef.current.focus();
-          break;
-
-        default:
-          break;
-      }
-
-    }
-  }
-
-  const handleSubmit = (e)=>{
-    alert();
-  }
   return (
     <div className="App">
       <header className="App-header">
-        <h3>UseRefs Hooks</h3>
-        <div className='form-control'>
-          <span>name</span>
-          <input ref={nameRef} type={"text"} id="nameInput" onKeyDown={keyPressHandle} ></input>
-        </div>
-        <div>
-          <span>age</span>
-          <input ref={ageRef} type={"text"} id="ageInput" onKeyDown={keyPressHandle}></input>
-        </div>
-        <div>
-          <span>married</span>
-          <input ref={marredRef} type={"checkbox"} id="marriedInput" onKeyDown={keyPressHandle} ></input>
-        </div>
-        <div>
-          <button ref={submitRef} id="submitInput" onClick={handleSubmit}>submit</button>
-        </div>
+        <h1>followers:{profile.followers}</h1>
+        <h1>followers:{profile.following}</h1>
+        <h1>public_repos:{profile.public_repos}</h1>
       </header>
     </div>
   )
