@@ -1,7 +1,6 @@
 {
     "rules":{
         "no-var":"error",
-        "no-console":"error",
         "no-alert":"error"
     }
 }
