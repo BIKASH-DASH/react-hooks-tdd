@@ -1,25 +1,57 @@
-import React, { useState } from 'react'
-import './App.scss'
-import Item from './components/Item'
-import UseList from './hooks/useList'
-const initialList = [
-  { name: "tomato", calorie: 20 },
-  { name: "rice", calorie: 50 },
-  { name: "candy", calorie: 150 },
-]
-
+import React, { useEffect, useRef } from 'react'
 
 export default function App() {
-  const useList = UseList(initialList);
+  const nameRef = useRef();
+  const ageRef = useRef();
+  const marredRef = useRef();
+  const submitRef = useRef();
+  useEffect(() => {
+    nameRef.current.focus();
+  }, [])
 
+  const keyPressHandle = (e) => {
+    if (e.keyCode === 13) {
+      switch (e.target.id) {
+        case 'nameInput':
+          ageRef.current.focus();
+          break;
+        case 'ageInput':
+          marredRef.current.focus();
+          break;
+        case 'marriedInput':
+          submitRef.current.focus();
+          break;
+
+        default:
+          break;
+      }
+
+    }
+  }
+
+  const handleSubmit = (e)=>{
+    alert();
+  }
   return (
-    <div>
-      {useList.list.map((item, index) => {
-        return (<Item key={index} changeEdit={useList.changeEdit} name={item.name} HandleEdit={useList.HandleEdit} editable={useList.editable} removeItem={useList.removeItem} calorie={item.calorie} />)
-      })}
-
-      <button onClick={() => useList.handleCalory()} className='remove-button'>remove Button</button>
+    <div className="App">
+      <header className="App-header">
+        <h3>UseRefs Hooks</h3>
+        <div className='form-control'>
+          <span>name</span>
+          <input ref={nameRef} type={"text"} id="nameInput" onKeyDown={keyPressHandle} ></input>
+        </div>
+        <div>
+          <span>age</span>
+          <input ref={ageRef} type={"text"} id="ageInput" onKeyDown={keyPressHandle}></input>
+        </div>
+        <div>
+          <span>married</span>
+          <input ref={marredRef} type={"checkbox"} id="marriedInput" onKeyDown={keyPressHandle} ></input>
+        </div>
+        <div>
+          <button ref={submitRef} id="submitInput" onClick={handleSubmit}>submit</button>
+        </div>
+      </header>
     </div>
   )
 }
-
