@@ -1,6 +1,7 @@
 import './App.scss';
 
 function App() {
+  console.log('hi');
   return (
     <div className="App">
       <header className="App-header">
